@@ -1,4 +1,5 @@
 import React from "react";
+import "./App.css";
 import Login from "./Authentication/Login/Login";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AuthLayout from "./Shared/AuthLayout/AuthLayout";
