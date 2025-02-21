@@ -23,17 +23,19 @@ function Login() {
   let {register, formState:{errors}, handleSubmit} = useForm();
   let navigate = useNavigate();
 
-  const notify = () => toast.success("Wow so easy!");
-
   const onSubmit = async (data) => {
     try {
       let response = await axios.post('https://upskilling-egypt.com:3006/api/v1/Users/Login', data);
-      console.log(response);
-      toast.success("Wow so easy!");
       navigate('/dashboard');
+      toast.success("Logged in successfully", {
+        position: "top-right",
+        theme: "light"
+      });
       
     } catch (error) {
-      console.log(error.response.data.message);
+      toast.error(error.response.data.message,{
+        theme: "light"
+      });
       
     }
   }
@@ -91,20 +93,8 @@ function Login() {
                   <Link to='forget-pass' className="text-black text-decoration-none">Register Now?</Link>
                   <Link to='register' className="text-decoration-none success">Forgot Password?</Link>
                 </div>
-                <ToastContainer
-position="top-center"
-autoClose={5000}
-hideProgressBar={false}
-newestOnTop={false}
-closeOnClick={false}
-rtl={false}
-pauseOnFocusLoss
-draggable
-pauseOnHover
-theme="dark"
-/>
+                <ToastContainer />
                 <AuthButton title='Login' />
-                <button onClick={notify}>toast</button>
 
               </form>
             </div>
