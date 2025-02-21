@@ -1,4 +1,3 @@
-import styles from "./Login.module.css";
 import logo from '../../assets/images/logo1.png';
 import emailIcon from '../../assets/icons/email.svg';
 import passwordIcon from '../../assets/icons/password.svg';
@@ -90,8 +89,8 @@ function Login() {
                 {errors.password&&<span className="bg-transparent text-danger mb-3">{errors.password.message}</span>}
 
                 <div className="links d-flex justify-content-between mb-4">
-                  <Link to='forget-pass' className="text-black text-decoration-none">Register Now?</Link>
-                  <Link to='register' className="text-decoration-none success">Forgot Password?</Link>
+                  <Link to='register' className="text-black text-decoration-none">Register Now?</Link>
+                  <Link to='forget-password' className="text-decoration-none success">Forgot Password?</Link>
                 </div>
                 <ToastContainer />
                 <AuthButton title='Login' />
