@@ -91,7 +91,7 @@ function Login() {
 
                 <div className="links d-flex justify-content-between mb-4">
                   <Link to='/register' className="text-black text-decoration-none">Register Now?</Link>
-                  <Link to='forget-password' className="text-decoration-none success">Forgot Password?</Link>
+                  <Link to='/forget-password' className="text-decoration-none success">Forgot Password?</Link>
                 </div>
                 <ToastContainer />
                 <AuthButton title='Login' />
