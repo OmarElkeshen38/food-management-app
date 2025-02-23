@@ -5,9 +5,9 @@ import showPassIcon from '../../assets/icons/showPass.svg';
 import AuthButton from "../../Shared/AuthButton/AuthButton";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
-import { baseUrl } from '../../services/urls/urlsjs';
+import { axiosInstance } from '../../services/urls/urlsjs';
+import { USER_URLS } from '../../services/urls/urlsjs';
 
 function Register() {
 
@@ -20,19 +20,30 @@ function Register() {
     }
   };
 
+  const showConfPass = () => {
+    const confirmPassInput = document.getElementById("confirmPassword");
+    if (confirmPassInput.type === "password") {
+      confirmPassInput.type = "text";
+    } else {
+      confirmPassInput.type = "password";
+    }
+  };
+
   let {register, formState:{errors}, handleSubmit} = useForm();
   let navigate = useNavigate();
 
   const onSubmit = async (data) => {
     try {
-      let response = await axios.post(`${baseUrl}/Users/Login`, data);
-      navigate('/dashboard');
-      toast.success("Logged in successfully", {
+      let response = await axiosInstance.post(`${USER_URLS.register}`, data);
+      navigate('/login');
+      toast.success("Register successfully", {
         position: "top-right",
         theme: "light"
       });
       
     } catch (error) {
+      console.log(error.response.data);
+      
       toast.error(error.response.data.message,{
         theme: "light"
       });
@@ -97,9 +108,9 @@ function Register() {
                         <img src={passwordIcon} className="w-100" alt="country icon" />
                       </span>
                       <input {...register('country', {
-                        required: 'Country fild is required',
+                        required: 'Country name is required',
                         pattern: {
-                          value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                          value: /^[A-Za-z\s]{2,}$/,
                           message: 'Please enter a valid country name.'
                         }
                       })}
@@ -139,7 +150,10 @@ function Register() {
                         message: 'Password must be at least 8 characters and include at least one number and one special character (@, #, $, etc.).'
                         }
                       })}
-                      type="password" className="form-control py-3 px-0" placeholder="password" aria-label="password" aria-describedby="basic-addon1" />
+                      type="password" id='password' className="form-control py-3 px-0" placeholder="password" aria-label="password" aria-describedby="basic-addon1" />
+                      <span className="input-group-text" id="basic-addon2">
+                        <img onClick={showPass} src={showPassIcon} className="w-100 border-0 p-0 showPass" alt="show password icon" />
+                      </span>
                     </div>
                     {errors.password&&<span className="bg-transparent text-danger">{errors.password.message}</span>}
                   </div>
@@ -157,6 +171,9 @@ function Register() {
                         }
                       })}
                       type="password" id="confirmPassword" className="form-control py-3 px-0" placeholder="confirm-password" aria-label="confirmPassword" aria-describedby="basic-addon2" />
+                      <span className="input-group-text" id="basic-addon2">
+                        <img onClick={showConfPass} src={showPassIcon} className="w-100 border-0 p-0 showPass" alt="show password icon" />
+                      </span>
                     </div>
                     {errors.confirmPassword&&<span className="bg-transparent text-danger mb-3">{errors.confirmPassword.message}</span>}
                   </div>

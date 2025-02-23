@@ -5,9 +5,7 @@ import showPassIcon from '../../assets/icons/showPass.svg';
 import AuthButton from "../../Shared/AuthButton/AuthButton";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
-import { baseUrl } from '../../services/urls/urlsjs';
 import { USER_URLS } from '../../services/urls/urlsjs';
 import { axiosInstance } from '../../services/urls/urlsjs';
 

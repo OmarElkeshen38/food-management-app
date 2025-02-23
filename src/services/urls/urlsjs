@@ -10,7 +10,7 @@ export const axiosInstance = axios.create({
 export const USER_URLS = {
 
     login: `/Users/Login`,
-    register: `/Users/register`,
+    register: `/Users/Register`,
     forget_pass: `/Users/Reset/Request`,
     reset_pass: `/Users/Reset`,
     get_user: (id) => `/Users/${id}`,
