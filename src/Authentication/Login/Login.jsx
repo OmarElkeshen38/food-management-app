@@ -7,6 +7,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
+import { baseUrl } from '../../services/urls/urlsjs';
+import { USER_URLS } from '../../services/urls/urlsjs';
+import { axiosInstance } from '../../services/urls/urlsjs';
 
 function Login() {
 
@@ -24,7 +27,7 @@ function Login() {
 
   const onSubmit = async (data) => {
     try {
-      let response = await axios.post('https://upskilling-egypt.com:3006/api/v1/Users/Login', data);
+      let response = await axiosInstance.post(`${USER_URLS.login}`, data);
       navigate('/dashboard');
       toast.success("Logged in successfully", {
         position: "top-right",
@@ -89,7 +92,7 @@ function Login() {
                 {errors.password&&<span className="bg-transparent text-danger mb-3">{errors.password.message}</span>}
 
                 <div className="links d-flex justify-content-between mb-4">
-                  <Link to='register' className="text-black text-decoration-none">Register Now?</Link>
+                  <Link to='/register' className="text-black text-decoration-none">Register Now?</Link>
                   <Link to='forget-password' className="text-decoration-none success">Forgot Password?</Link>
                 </div>
                 <ToastContainer />
