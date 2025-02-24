@@ -6,8 +6,8 @@ import AuthButton from "../../Shared/AuthButton/AuthButton";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from 'react-toastify';
-import { axiosInstance } from '../../services/urls/urlsjs';
-import { USER_URLS } from '../../services/urls/urlsjs';
+import { axiosInstance } from '../../services/urls/urls.js';
+import { USER_URLS } from '../../services/urls/urls.js';
 
 function Register() {
 
