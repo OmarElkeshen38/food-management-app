@@ -185,7 +185,7 @@ function Register() {
                   <Link to='/login' className="text-decoration-none success">Login Now?</Link>
                 </div>
                 <ToastContainer />
-                <AuthButton title='Login' />
+                <AuthButton title='Register' />
 
               </form>
             </div>
