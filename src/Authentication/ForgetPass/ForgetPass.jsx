@@ -1,7 +1,5 @@
 import logo from '../../assets/images/logo1.png';
 import emailIcon from '../../assets/icons/email.svg';
-import passwordIcon from '../../assets/icons/password.svg';
-import showPassIcon from '../../assets/icons/showPass.svg';
 import AuthButton from "../../Shared/AuthButton/AuthButton";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
