@@ -9,7 +9,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { USER_URLS } from '../../services/urls/urls.js';
 import { axiosInstance } from '../../services/urls/urls.js';
 
-function Login() {
+function Login({saveLoginData}) {
 
   const showPass = () => {
     const passwordInput = document.getElementById("password");
@@ -26,6 +26,8 @@ function Login() {
   const onSubmit = async (data) => {
     try {
       let response = await axiosInstance.post(`${USER_URLS.login}`, data);
+      localStorage.setItem('token',response.data.token);
+      saveLoginData();
       navigate('/dashboard');
       toast.success("Logged in successfully", {
         position: "top-right",

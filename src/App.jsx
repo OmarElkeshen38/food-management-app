@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import Login from "./Authentication/Login/Login";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -15,16 +15,26 @@ import RecipeData from "./Recipes/RecipeData/RecipeData";
 import CategoriesList from "./Categories/CategoriesList/CategoriesList";
 import CategoryData from "./Categories/CategoryData/CategoryData";
 import UsersList from "./Users/UsersList/UsersList";
+import { jwtDecode } from "jwt-decode";
 
 function App() {
+
+  const [loginData, setLoginData] = useState(null);
+
+  let saveLoginData = () => {
+    let decodedToken = jwtDecode(localStorage.getItem('token'));
+    console.log(decodedToken);
+    
+  }
+
   const routes = createBrowserRouter([
     {
       path: "",
       element: <AuthLayout />,
       errorElement: <NotFound />,
       children: [
-        { index: true, element: <Login /> },
-        { path: "login", element: <Login /> },
+        { index: true, element: <Login saveLoginData={saveLoginData} /> },
+        { path: "login", element: <Login saveLoginData={saveLoginData} /> },
         { path: "register", element: <Register /> },
         { path: "forget-password", element: <ForgetPass /> },
         { path: "reset-password", element: <ResetPass /> },
