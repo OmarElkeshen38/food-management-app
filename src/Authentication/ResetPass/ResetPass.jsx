@@ -82,15 +82,15 @@ function ResetPass() {
                 </div>
                 {errors.email&&<span className="bg-transparent text-danger">{errors.email.message}</span>}
 
-                <div className="input-group my-2">
+                <div className="input-group my-3">
                   <span className="input-group-text" id="basic-addon1">
                     <img src={passwordIcon} alt="otp icon" />
                   </span>
                   <input {...register('seed', {
                     required: 'Otp is required',
                     pattern: {
-                      value: /^(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-                      message: 'Password must be at least 8 characters and include at least one number and one special character (@, #, $, etc.).'
+                      value: /^[A-Za-z0-9]{4,8}$/,
+                      message: 'OTP must be 4 to 8 characters long and contain only letters and numbers.'
                     }
                   })}
                   type="text" id="seed" className="form-control py-2 px-0" placeholder="OTP" aria-label="seed" aria-describedby="basic-addon2" />
@@ -115,7 +115,7 @@ function ResetPass() {
                 </div>
                 {errors.password&&<span className="bg-transparent text-danger mb-3">{errors.password.message}</span>}
 
-                <div className="input-group my-2">
+                <div className="input-group my-3">
                   <span className="input-group-text" id="basic-addon1">
                     <img src={passwordIcon} alt="confirm password icon" />
                   </span>
