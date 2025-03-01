@@ -16,6 +16,7 @@ import CategoriesList from "./Categories/CategoriesList/CategoriesList";
 import CategoryData from "./Categories/CategoryData/CategoryData";
 import UsersList from "./Users/UsersList/UsersList";
 import { jwtDecode } from "jwt-decode";
+import ProtectedRoute from "./Shared/ProtectedRoute/ProtectedRoute";
 
 function App() {
 
@@ -43,7 +44,7 @@ function App() {
     },
     {
       path: "/dashboard",
-      element: <MainLayout />,
+      element: <ProtectedRoute><MainLayout /></ProtectedRoute>,
       errorElement: <NotFound />,
       children: [
         { index: true, element: <Dashboard /> },
