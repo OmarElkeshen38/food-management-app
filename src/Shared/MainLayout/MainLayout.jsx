@@ -3,15 +3,17 @@ import Header from "../Header/Header";
 import Navbar from "../Navbar/Navbar";
 import SideBar from "../SideBar/SideBar";
 
-function MainLayout() {
+function MainLayout({ loginData }) {
+  console.log(loginData);
+  
   return (
     <>
       <div className="d-flex">
-        <div className="w-25 bg-info">
+        <div className="w-25">
           <SideBar />
         </div>
-        <div className="w-75 bg-danger">
-          <Navbar />
+        <div className="w-75">
+          <Navbar loginData={loginData} />
           <Header />
           <Outlet />
         </div>

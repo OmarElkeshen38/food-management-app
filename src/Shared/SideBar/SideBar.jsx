@@ -18,8 +18,8 @@ function SideBar() {
 
   return (
     <>
-      <Sidebar className='bg-black'>
-        <Menu className='p-4'>
+      <Sidebar className={styles.sideBar}>
+        <Menu className='p-4 bg-transparent'>
           <MenuItem className='p-4' icon={<img src={logo} alt='food recipe Logo' />} > </MenuItem>
           <MenuItem icon={<img src={homeIcon} alt='home icon' />} component={<Link to="/dashboard" />}> Home </MenuItem>
           <MenuItem icon={<img src={usersIcon} alt='home icon' />} component={<Link to="/dashboard/users" />}> Users </MenuItem>

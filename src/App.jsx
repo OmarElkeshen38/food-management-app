@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import Login from "./Authentication/Login/Login";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -24,9 +24,14 @@ function App() {
 
   let saveLoginData = () => {
     let decodedToken = jwtDecode(localStorage.getItem('token'));
-    console.log(decodedToken);
-    
+    setLoginData(decodedToken);
   }
+
+  useEffect(() => {
+    if (localStorage.getItem('token')) {
+      saveLoginData();
+    }
+  }, []);
 
   const routes = createBrowserRouter([
     {
@@ -44,7 +49,7 @@ function App() {
     },
     {
       path: "/dashboard",
-      element: <ProtectedRoute><MainLayout /></ProtectedRoute>,
+      element: <ProtectedRoute><MainLayout loginData={loginData} /></ProtectedRoute>,
       errorElement: <NotFound />,
       children: [
         { index: true, element: <Dashboard /> },
