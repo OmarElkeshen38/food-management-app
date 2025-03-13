@@ -13,7 +13,7 @@ function Navbar({ loginData }) {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ms-auto">
             <li className="nav-item active">
-              <a className="nav-link">{loginData?.userEmail} <span className="sr-only">(current)</span></a>
+              <a className="nav-link">{loginData?.userName} <span className="sr-only">(current)</span></a>
             </li>
           </ul>
         </div>

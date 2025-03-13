@@ -20,7 +20,11 @@ import ProtectedRoute from "./Shared/ProtectedRoute/ProtectedRoute";
 
 function App() {
 
-  const [loginData, setLoginData] = useState(null);
+  const [loginData, setLoginData] = useState(() => {
+    let token = localStorage.getItem('token');
+    return token ? jwtDecode(token) : null;
+  }
+  );
 
   let saveLoginData = () => {
     let decodedToken = jwtDecode(localStorage.getItem('token'));
