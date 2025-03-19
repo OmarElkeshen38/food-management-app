@@ -1,6 +1,7 @@
 import axios from "axios";
 import styles from "./CategoriesList.module.css";
 import { useEffect, useState } from "react";
+import Header from "../../Shared/Header/Header";
 
 function CategoriesList() {
 
@@ -8,7 +9,7 @@ function CategoriesList() {
 
   let getAllCategories = async () => {
     try {
-      let response = await axios.get("https://upskilling-egypt.com:3006/api/v1/Category/?pageSize=10&pageNumber=1", {
+      let response = await axios.get("https://upskilling-egypt.com:3006/api/v1/Category/?pageSize=10&pageNumber=20", {
         headers: {Authorization: `${localStorage.getItem('token')}`},
       });
       setCategoriesList(response.data.data);
@@ -24,27 +25,41 @@ function CategoriesList() {
 
   return (
     <>
-      <table className="table">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">creation date</th>
-            <th scope="col">actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {CategoriesList.map((category) => 
-            <tr key={category.id}>
-              <th scope="row">{category.id}</th>
-              <td>{category.name}</td>
-              <td>{category.creationDate}</td>
-              <td></td>
+    <Header title="Categories Item" desc="You can now add your items that any user can order it from the Application and you can edit" />
+      <div className="title mt-4 d-flex align-items-center justify-content-between">
+        <div className="caption">
+          <h3>Categories Table Details</h3>
+          <p>You can check all details</p>
+        </div>
+        <div className="button">
+          <button className="btn btn-success">Add New Category</button>
+        </div>
+      </div>
+      <div className="py-4">
+        <table className="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Name</th>
+              <th scope="col">creation date</th>
+              <th scope="col">actions</th>
             </tr>
-            
-          )}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {CategoriesList.length > 0 ? CategoriesList.map((category) => 
+              <tr key={category.id}>
+                <th scope="row">{category.id}</th>
+                <td>{category.name}</td>
+                <td>{category.creationDate}</td>
+                <td>
+                <i className="fa-solid fa-trash text-danger mx-2"></i>
+                <i className="fa-solid fa-edit text-warning"></i>
+                </td>
+              </tr>
+            ) : <h2>No Data</h2>}
+          </tbody>
+        </table>
+      </div>
     </>
   );
 }

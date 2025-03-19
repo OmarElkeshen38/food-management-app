@@ -12,7 +12,7 @@ function MainLayout({ loginData }) {
           <div className="col-md-2">
             <SideBar />
           </div>
-          <div className="col-md-10">
+          <div className="col-md-10 py-0 px-4">
             <Navbar loginData={loginData} />
             <Outlet />
           </div>
