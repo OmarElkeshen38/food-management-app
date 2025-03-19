@@ -2,6 +2,7 @@ import axios from "axios";
 import styles from "./CategoriesList.module.css";
 import { useEffect, useState } from "react";
 import Header from "../../Shared/Header/Header";
+import NoData from "../../Shared/NoData/NoData";
 
 function CategoriesList() {
 
@@ -9,11 +10,23 @@ function CategoriesList() {
 
   let getAllCategories = async () => {
     try {
-      let response = await axios.get("https://upskilling-egypt.com:3006/api/v1/Category/?pageSize=10&pageNumber=20", {
+      let response = await axios.get("https://upskilling-egypt.com:3006/api/v1/Category/?pageSize=10&pageNumber=1", {
         headers: {Authorization: `${localStorage.getItem('token')}`},
       });
       setCategoriesList(response.data.data);
       
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  let deleteCategory = async (id) => {
+    try {
+      let response = await axios.delete(`https://upskilling-egypt.com:3006/api/v1/Category/${id}`, {
+        headers: {Authorization: `${localStorage.getItem('token')}`},
+      });
+      console.log(response);
+      getAllCategories();
     } catch (error) {
       console.log(error);
     }
@@ -52,11 +65,11 @@ function CategoriesList() {
                 <td>{category.name}</td>
                 <td>{category.creationDate}</td>
                 <td>
-                <i className="fa-solid fa-trash text-danger mx-2"></i>
+                <i className="fa-solid fa-trash text-danger mx-2" onClick={()=>deleteCategory(category.id)}></i>
                 <i className="fa-solid fa-edit text-warning"></i>
                 </td>
               </tr>
-            ) : <h2>No Data</h2>}
+            ) : <NoData />}
           </tbody>
         </table>
       </div>

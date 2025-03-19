@@ -2,9 +2,7 @@ import styles from './NoData.module.css';
 
 function NoData() {
   return (
-    <div>
-      
-    </div>
+    <div>Nodata soraaaaa</div>
   )
 }
 
