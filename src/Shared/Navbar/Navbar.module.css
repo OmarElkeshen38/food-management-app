@@ -1,0 +1,28 @@
+
+.navBg {
+    background-color: #F8F9FB;
+    margin: 20px 0px;
+    border-radius: 15px;
+}
+
+.imgNav{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    
+}
+
+.serchInput {
+    border: none;
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 8px 20px;
+}
+
+.serchInput input {
+    border: none;
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 5px;
+    outline: none;
+}

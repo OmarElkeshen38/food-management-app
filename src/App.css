@@ -1,3 +1,10 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
 .auth-container {
     background-image: url(../src/assets/images/authBg.png);
     background-size: cover;
@@ -7,6 +14,12 @@
 .bg-overlay {
     background: linear-gradient(45deg,rgba(47, 140, 96, 1), rgba(0, 0, 0, 0.8));
 }
+
+.dropdown li,i{
+    cursor: pointer;
+}
+
+/* login */
 
 .loginForm input, .loginForm span {
     background-color: #F7F7F7;
@@ -54,7 +67,7 @@ form input:focus, form input:active {
 
 .sidebar-container .ps-menu-button:hover{
     background-color: rgba(0, 146, 71, 0.1) !important;
-    border-left: 3px solid rgb(0, 146, 71);
+    border-left: 4px solid rgb(0, 146, 71);
     transition: all 0.3s ;
     -webkit-transition: all 0.3s ;
     -moz-transition: all 0.3s ;
