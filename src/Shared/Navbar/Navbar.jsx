@@ -1,7 +1,6 @@
 import styles from './Navbar.module.css';
 
 function Navbar({ loginData }) {
-  console.log(loginData);
   
   return (
     <>

@@ -32,3 +32,37 @@ form input:focus, form input:active {
 .links .success {
     color: #4AA35A;
 }
+
+
+/*----------------------- sideBar -------------------*/
+
+
+.sidebar-container{
+    width: 100% !important;
+}
+
+.sidebar-container .ps-sidebar-root .ps-sidebar-container  {
+    background-color: #1F263E;
+    color: #fff;
+    height: 100dvh;
+    border-top-right-radius: 50px;
+}
+
+.css-1wvake5 {
+    border: none !important;
+}
+
+.sidebar-container .ps-menu-button:hover{
+    background-color: rgba(0, 146, 71, 0.1) !important;
+    border-left: 3px solid rgb(0, 146, 71);
+    transition: all 0.3s ;
+    -webkit-transition: all 0.3s ;
+    -moz-transition: all 0.3s ;
+    -ms-transition: all 0.3s ;
+    -o-transition: all 0.3s ;
+}
+.sidebar-container .logo a:hover{
+    background-color:transparent !important;
+    border-left:none;
+}
+

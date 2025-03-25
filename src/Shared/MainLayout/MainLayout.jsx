@@ -1,23 +1,25 @@
+import React, { useContext } from 'react'
 import { Outlet } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 import SideBar from "../SideBar/SideBar";
 
 function MainLayout({ loginData }) {
-  console.log(loginData);
 
   return (
     <>
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col-md-2">
-            <SideBar />
-          </div>
-          <div className="col-md-10 py-0 px-4">
-            <Navbar loginData={loginData} />
-            <Outlet />
+      <div className="d-flex gap-4 vh-100">
+        <div >
+          <SideBar loginData={loginData} />
+        </div>
+
+        <div className="w-100 d-flex flex-column">
+          <Navbar loginData={loginData} />
+          <div className='overflow-y-auto'>
+            <Outlet context={{ loginData }} />
           </div>
         </div>
       </div>
+
     </>
   );
 }
