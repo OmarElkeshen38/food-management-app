@@ -1,4 +1,3 @@
-import styles from './NoData.module.css';
 import noDataImg from '../../assets/images/noDataImg.png';
 
 function NoData() {

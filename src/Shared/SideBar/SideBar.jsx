@@ -1,11 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { Sidebar, Menu, MenuItem } from 'react-pro-sidebar';
 import logo from '../../assets/images/sideBarLogo.png';
-import homeIcon from '../../assets/icons/home.svg';
-import usersIcon from '../../assets/icons/users.svg';
-import recipesIcon from '../../assets/icons/recipes.svg';
-import categoriesIcon from '../../assets/icons/category.svg';
-import logoutIcon from '../../assets/icons/logout.svg';
 import { useEffect, useState } from 'react';
 
 function SideBar({ loginData }) {

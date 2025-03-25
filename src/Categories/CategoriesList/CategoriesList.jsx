@@ -25,7 +25,6 @@ function CategoriesList() {
       let response = await axios.delete(`https://upskilling-egypt.com:3006/api/v1/Category/${id}`, {
         headers: {Authorization: `${localStorage.getItem('token')}`},
       });
-      console.log(response);
       getAllCategories();
     } catch (error) {
       console.log(error);

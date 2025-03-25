@@ -7,15 +7,27 @@ import recipesHeaderImg from '../../assets/images/recipesHeaderImg.png';
 function RecipesList() {
 
   const [recipesData, setRecipesData] = useState([]);
+  let imgUrl = 'https://upskilling-egypt.com:3006/';
 
   let getAllRecipes = async () => {
     try {
       let response = await axios.get("https://upskilling-egypt.com:3006/api/v1/Recipe/?pageSize=10&pageNumber=1", {
-        headers: {Authorization: `${localStorage.getItem('token')}`},
+        headers: { Authorization: `${localStorage.getItem('token')}` },
       });
       setRecipesData(response.data.data);
       console.log(response.data.data);
-      
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  let deleteRecipe = async (id) => {
+    try {
+      let response = await axios.delete(`https://upskilling-egypt.com:3006/api/v1/Recipe/${id}`, {
+        headers: {Authorization: `${localStorage.getItem('token')}`},
+      });
+      getAllRecipes();
     } catch (error) {
       console.log(error);
     }
@@ -52,13 +64,15 @@ function RecipesList() {
             </tr>
           </thead>
           <tbody>
-            {recipesData.length > 0 ? recipesData.map((recipe) => 
+            {recipesData.length > 0 ? recipesData.map((recipe) =>
               <tr key={recipe.id}>
                 <th scope="row">{recipe.id}</th>
                 <td>{recipe.name}</td>
-                <td>{recipe.creationDate}</td>
+                <td>{recipe.imagePath?<img className='w-25' src={`${imgUrl}/${recipe.imagePath}`} alt={recipe.name} /> : <span>No Image</span>}</td>
+                <td>{recipe.price}</td>
+                <td>{recipe.description}</td>
                 <td>
-                  <i className="fa-solid fa-trash text-danger mx-2" onClick={()=>deleteCategory(category.id)}></i>
+                  <i className="fa-solid fa-trash text-danger mx-2" onClick={()=>deleteRecipe(recipe.id)}></i>
                   <i className="fa-solid fa-edit text-warning"></i>
                 </td>
               </tr>
