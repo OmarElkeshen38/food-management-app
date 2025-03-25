@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import Header from '../../Shared/Header/Header';
-import styles from './RecipesList.module.css';
 import axios from 'axios';
 import NoData from '../../Shared/NoData/NoData';
+import recipesHeaderImg from '../../assets/images/recipesHeaderImg.png';
 
 function RecipesList() {
 
@@ -28,7 +28,7 @@ function RecipesList() {
 
   return (
     <>
-      <Header title="Recipes Items" desc="You can now add your items that any user can order it from the Application and you can edit" />
+      <Header img={recipesHeaderImg} title="Recipes Items" desc="You can now add your items that any user can order it from the Application and you can edit" />
       <div className="title mt-4 d-flex align-items-center justify-content-between">
         <div className="caption">
           <h3>Recipe Table Details</h3>

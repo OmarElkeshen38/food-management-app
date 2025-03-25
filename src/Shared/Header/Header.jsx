@@ -3,17 +3,17 @@ import styles from "./Header.module.css";
 function Header({title, desc, img}) {
   return (
     <>
-      <div className="container-fluid">
-        <div className="row p-5 rounded-4 bg-dark">
-          <div className="col-md-8">
-            <div className="caption bg-info">
+      <div className={`container-fluid ${styles.header}`}>
+        <div className={`row rounded-4 ${styles.headerContent}`}>
+          <div className="col-md-8 d-flex align-items-center">
+            <div className="content text-white m-4">
               <h3>{title}</h3>
               <p>{desc}</p>
             </div>
           </div>
-          <div className="col-md-4">
-            <div className="img-container bg-danger">
-              <h2>soraa</h2>
+          <div className="col-md-4 text-center">
+            <div className="img">
+              <img className="w-" src={img} alt="header image" />
             </div>
           </div>
         </div>

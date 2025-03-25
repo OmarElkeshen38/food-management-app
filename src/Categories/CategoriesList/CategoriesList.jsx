@@ -1,5 +1,5 @@
 import axios from "axios";
-import styles from "./CategoriesList.module.css";
+import recipesHeaderImg from '../../assets/images/recipesHeaderImg.png';
 import { useEffect, useState } from "react";
 import Header from "../../Shared/Header/Header";
 import NoData from "../../Shared/NoData/NoData";
@@ -38,7 +38,7 @@ function CategoriesList() {
 
   return (
     <>
-    <Header title="Categories Item" desc="You can now add your items that any user can order it from the Application and you can edit" />
+    <Header img={recipesHeaderImg} title="Categories Item" desc="You can now add your items that any user can order it from the Application and you can edit" />
       <div className="title mt-4 d-flex align-items-center justify-content-between">
         <div className="caption">
           <h3>Categories Table Details</h3>

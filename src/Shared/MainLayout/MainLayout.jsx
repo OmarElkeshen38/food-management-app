@@ -7,12 +7,12 @@ function MainLayout({ loginData }) {
 
   return (
     <>
-      <div className="d-flex gap-4 vh-100">
+      <div className="d-flex vh-100">
         <div >
           <SideBar loginData={loginData} />
         </div>
 
-        <div className="w-100 d-flex flex-column">
+        <div className="w-100 d-flex flex-column px-3">
           <Navbar loginData={loginData} />
           <div className='overflow-y-auto'>
             <Outlet context={{ loginData }} />

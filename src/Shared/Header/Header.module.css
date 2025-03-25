@@ -1,0 +1,12 @@
+
+.header {
+    /* background-color:rgba(0, 146, 71, 1) !important ; */
+}
+
+.header .headerContent {
+    background-image: url(../../assets/images/headerBg.png);
+    background-size: cover;
+    background-position: center;
+    border-radius: 15px !important;
+  }
+  
