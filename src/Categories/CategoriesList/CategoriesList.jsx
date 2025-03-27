@@ -38,7 +38,7 @@ function CategoriesList() {
   return (
     <>
     <Header img={recipesHeaderImg} title="Categories Item" desc="You can now add your items that any user can order it from the Application and you can edit" />
-      <div className="title mt-4 d-flex align-items-center justify-content-between">
+      <div className="title mt-4 px-4 d-flex align-items-center justify-content-between">
         <div className="caption">
           <h3>Categories Table Details</h3>
           <p>You can check all details</p>
