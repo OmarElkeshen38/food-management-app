@@ -6,8 +6,7 @@ import AuthButton from "../../Shared/AuthButton/AuthButton";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from 'react-toastify';
-import { axiosInstance } from '../../services/urls/urls.js';
-import { USER_URLS } from '../../services/urls/urls.js';
+import { publicAxiosInstance, USERS_URLS } from '../../services/urls/urls.js';
 
 function Register() {
 
@@ -34,7 +33,7 @@ function Register() {
 
   const onSubmit = async (data) => {
     try {
-      let response = await axiosInstance.post(`${USER_URLS.register}`, data);
+      let response = await publicAxiosInstance.post(`${USERS_URLS.register}`, data);
       navigate('/login');
       toast.success("Register successfully", {
         position: "top-right",

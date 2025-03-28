@@ -6,8 +6,8 @@ import AuthButton from "../../Shared/AuthButton/AuthButton";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from 'react-toastify';
-import { USER_URLS } from '../../services/urls/urls.js';
-import { axiosInstance } from '../../services/urls/urls.js';
+import { USERS_URLS } from '../../services/urls/urls.js';
+import { publicAxiosInstance } from '../../services/urls/urls.js';
 
 function ResetPass() {
 
@@ -34,7 +34,7 @@ function ResetPass() {
 
   const onSubmit = async (data) => {
     try {
-      let response = await axiosInstance.post(`${USER_URLS.reset_pass}`, data);
+      let response = await publicAxiosInstance.post(`${USERS_URLS.reset_pass}`, data);
       navigate('/login');
       console.log(response);
       
