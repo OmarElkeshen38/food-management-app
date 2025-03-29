@@ -3,7 +3,7 @@ import passwordIcon from '../../assets/icons/password.svg';
 import showPassIcon from '../../assets/icons/showPass.svg';
 import mailIcon from '../../assets/icons/emailIcon.svg';
 import AuthButton from "../../Shared/AuthButton/AuthButton";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from 'react-toastify';
 import { USERS_URLS } from '../../services/urls/urls.js';
@@ -12,6 +12,8 @@ import { EMAIL_VALIDATION, PASSWORD_VALIDATION } from '../../services/Validation
 import { useEffect } from 'react';
 
 function ResetPass() {
+
+  const {state} = useLocation()
 
   const showPass = () => {
     const passwordInput = document.getElementById("password");
@@ -31,7 +33,7 @@ function ResetPass() {
     }
   };
 
-  let { register, formState: { errors, isSubmitting }, handleSubmit, watch, trigger } = useForm({ node: "onChange" });
+  let { register, formState: { errors, isSubmitting }, handleSubmit, watch, trigger } = useForm({defaultValues:{email:state?.email}},{ node: "onChange" });
   let navigate = useNavigate();
 
   const password = watch('password', '');

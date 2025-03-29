@@ -20,7 +20,7 @@ function ForgetPass() {
         position: "top-right",
         theme: "light"
       });
-      navigate('/reset-password');
+      navigate('/reset-password', {state: { email: data.email }});
 
     } catch (error) {
       toast.error(error.response.data.message, {
