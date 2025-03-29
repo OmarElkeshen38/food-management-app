@@ -63,7 +63,8 @@ function VerifyAccount() {
                   </div>
                   {errors.code && <span className='bg-transparent text-danger'>{errors.code.message}</span>}
 
-                  <AuthButton title='Send' />
+                  <AuthButton title={isSubmitting ? <i className="fa-solid fa-spinner fa-spin"></i> : 'Send'} />
+
                 </form>
               </div>
             </div>

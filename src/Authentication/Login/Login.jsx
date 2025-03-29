@@ -10,7 +10,7 @@ import { USERS_URLS } from '../../services/urls/urls.js';
 import { publicAxiosInstance } from '../../services/urls/urls.js';
 import { EMAIL_VALIDATION, PASSWORD_VALIDATION } from '../../services/Validation/Validation.js';
 
-function Login({saveLoginData}) {
+function Login({ saveLoginData }) {
 
   const showPass = () => {
     const passwordInput = document.getElementById("password");
@@ -21,25 +21,25 @@ function Login({saveLoginData}) {
     }
   };
 
-  let {register, formState:{errors}, handleSubmit} = useForm();
+  let { register, formState: { errors, isSubmitting }, handleSubmit } = useForm();
   let navigate = useNavigate();
 
   const onSubmit = async (data) => {
     try {
       let response = await publicAxiosInstance.post(`${USERS_URLS.Login}`, data);
-      localStorage.setItem('token',response.data.token);
+      localStorage.setItem('token', response.data.token);
       saveLoginData();
       navigate('/dashboard');
       toast.success("Logged in successfully", {
         position: "top-right",
         theme: "light"
       });
-      
+
     } catch (error) {
-      toast.error(error.response.data.message,{
+      toast.error(error.response.data.message, {
         theme: "light"
       });
-      
+
     }
   }
 
@@ -62,30 +62,31 @@ function Login({saveLoginData}) {
                     <img src={emailIcon} className="w-100" alt="email icon" />
                   </span>
                   <input {...register('email', EMAIL_VALIDATION)}
-                  type="email" className="form-control py-2 px-0" placeholder="Email" aria-label="email" aria-describedby="basic-addon1" />
+                    type="email" className="form-control py-2 px-0" placeholder="Email" aria-label="email" aria-describedby="basic-addon1" />
                 </div>
 
-                {errors.email&&<span className="bg-transparent text-danger">{errors.email.message}</span>}
+                {errors.email && <span className="bg-transparent text-danger">{errors.email.message}</span>}
 
                 <div className="input-group my-2">
                   <span className="input-group-text" id="basic-addon1">
                     <img src={passwordIcon} alt="password icon" />
                   </span>
                   <input {...register('password', PASSWORD_VALIDATION)}
-                  type="password" id="password" className="form-control py-2 px-0" placeholder="Password" aria-label="password" aria-describedby="basic-addon2" />
+                    type="password" id="password" className="form-control py-2 px-0" placeholder="Password" aria-label="password" aria-describedby="basic-addon2" />
                   <span className="input-group-text" id="basic-addon2">
                     <img onClick={showPass} src={showPassIcon} className="w-100 border-0 p-0 showPass" alt="show password icon" />
                   </span>
                 </div>
 
-                {errors.password&&<span className="bg-transparent text-danger mb-3">{errors.password.message}</span>}
+                {errors.password && <span className="bg-transparent text-danger mb-3">{errors.password.message}</span>}
 
                 <div className="links d-flex justify-content-between mb-4">
                   <Link to='/register' className="text-black text-decoration-none">Register Now?</Link>
                   <Link to='/forget-password' className="text-decoration-none success">Forgot Password?</Link>
                 </div>
                 <ToastContainer />
-                <AuthButton title='Login' />
+
+                <AuthButton title={isSubmitting ? <i className="fa-solid fa-spinner fa-spin"></i> : 'Login'} />
 
               </form>
             </div>

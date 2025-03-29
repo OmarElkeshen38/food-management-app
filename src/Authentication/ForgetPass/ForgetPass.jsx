@@ -10,7 +10,7 @@ import { EMAIL_VALIDATION } from '../../services/Validation/Validation.js';
 
 function ForgetPass() {
 
-  let { register, formState: { errors }, handleSubmit } = useForm();
+  let { register, formState: { errors,isSubmitting }, handleSubmit } = useForm();
   let navigate = useNavigate();
 
   const onSubmit = async (data) => {
@@ -58,7 +58,8 @@ function ForgetPass() {
                   <Link to='/login' className="text-decoration-none success">Login Now?</Link>
                 </div>
                 <ToastContainer />
-                <AuthButton title='Submit' />
+
+                <AuthButton title={isSubmitting ? <i className="fa-solid fa-spinner fa-spin"></i> : 'Submit'} />
 
               </form>
             </div>

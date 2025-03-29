@@ -29,7 +29,7 @@ function Register() {
     }
   };
 
-  let { register, formState: { errors }, handleSubmit } = useForm();
+  let { register, formState: { errors,isSubmitting }, handleSubmit } = useForm();
   let navigate = useNavigate();
 
   const onSubmit = async (data) => {
@@ -167,7 +167,7 @@ function Register() {
                   <Link to='/login' className="text-decoration-none success">Login Now?</Link>
                 </div>
                 <ToastContainer />
-                <AuthButton title='Register' />
+                <AuthButton title={isSubmitting ? <i className="fa-solid fa-spinner fa-spin"></i> : 'Register'} />
 
               </form>
             </div>

@@ -30,7 +30,7 @@ function ResetPass() {
     }
   };
 
-  let {register, formState:{errors}, handleSubmit} = useForm();
+  let { register, formState: { errors, isSubmitting }, handleSubmit } = useForm();
   let navigate = useNavigate();
 
   const onSubmit = async (data) => {
@@ -38,19 +38,19 @@ function ResetPass() {
       let response = await publicAxiosInstance.post(`${USERS_URLS.reset_pass}`, data);
       navigate('/login');
       console.log(response);
-      
+
       toast.success("Password reset successfully", {
         position: "top-right",
         theme: "light"
       });
-      
+
     } catch (error) {
       console.log(error.response.data);
-      
-      toast.error(error.response.data.message,{
+
+      toast.error(error.response.data.message, {
         theme: "light"
       });
-      
+
     }
   }
 
@@ -73,9 +73,9 @@ function ResetPass() {
                     <img src={mailIcon} className="w-100" alt="email icon" />
                   </span>
                   <input {...register('email', EMAIL_VALIDATION)}
-                  type="email" className="form-control py-2 px-0" placeholder="Email" aria-label="email" aria-describedby="basic-addon1" />
+                    type="email" className="form-control py-2 px-0" placeholder="Email" aria-label="email" aria-describedby="basic-addon1" />
                 </div>
-                {errors.email&&<span className="bg-transparent text-danger">{errors.email.message}</span>}
+                {errors.email && <span className="bg-transparent text-danger">{errors.email.message}</span>}
 
                 <div className="input-group my-3">
                   <span className="input-group-text" id="basic-addon1">
@@ -88,21 +88,21 @@ function ResetPass() {
                       message: 'OTP must be 4 to 8 characters long and contain only letters and numbers.'
                     }
                   })}
-                  type="text" id="seed" className="form-control py-2 px-0" placeholder="OTP" aria-label="seed" aria-describedby="basic-addon2" />
+                    type="text" id="seed" className="form-control py-2 px-0" placeholder="OTP" aria-label="seed" aria-describedby="basic-addon2" />
                 </div>
-                {errors.seed&&<span className="bg-transparent text-danger mb-3">{errors.seed.message}</span>}
+                {errors.seed && <span className="bg-transparent text-danger mb-3">{errors.seed.message}</span>}
 
                 <div className="input-group my-2">
                   <span className="input-group-text" id="basic-addon1">
                     <img src={passwordIcon} alt="password icon" />
                   </span>
                   <input {...register('password', PASSWORD_VALIDATION)}
-                  type="password" id="password" className="form-control py-2 px-0" placeholder="New Password" aria-label="password" aria-describedby="basic-addon2" />
+                    type="password" id="password" className="form-control py-2 px-0" placeholder="New Password" aria-label="password" aria-describedby="basic-addon2" />
                   <span className="input-group-text" id="basic-addon2">
                     <img onClick={showPass} src={showPassIcon} className="w-100 border-0 p-0 showPass" alt="show password icon" />
                   </span>
                 </div>
-                {errors.password&&<span className="bg-transparent text-danger mb-3">{errors.password.message}</span>}
+                {errors.password && <span className="bg-transparent text-danger mb-3">{errors.password.message}</span>}
 
                 <div className="input-group my-3">
                   <span className="input-group-text" id="basic-addon1">
@@ -115,18 +115,19 @@ function ResetPass() {
                       message: 'Passwords do not match. Please enter the same password.'
                     }
                   })}
-                  type="password" id="confirmPassword" className="form-control py-2 px-0" placeholder="Confirm New Password" aria-label="confirmPassword" aria-describedby="basic-addon2" />
+                    type="password" id="confirmPassword" className="form-control py-2 px-0" placeholder="Confirm New Password" aria-label="confirmPassword" aria-describedby="basic-addon2" />
                   <span className="input-group-text" id="basic-addon2">
                     <img onClick={showConfPass} src={showPassIcon} className="w-100 border-0 p-0 showPass" alt="show password icon" />
                   </span>
                 </div>
-                {errors.confirmPassword&&<span className="bg-transparent text-danger mb-3">{errors.confirmPassword.message}</span>}
+                {errors.confirmPassword && <span className="bg-transparent text-danger mb-3">{errors.confirmPassword.message}</span>}
 
                 <div className="links d-flex justify-content-end mb-4">
                   <Link to='/login' className="text-decoration-none success">Login Now?</Link>
                 </div>
                 <ToastContainer />
-                <AuthButton title='Reset Password' />
+
+                <AuthButton title={isSubmitting ? <i className="fa-solid fa-spinner fa-spin"></i> : 'Reset Password'} />
 
               </form>
             </div>
