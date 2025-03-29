@@ -6,10 +6,11 @@ import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from 'react-toastify';
 import { USERS_URLS } from '../../services/urls/urls.js';
 import { publicAxiosInstance } from '../../services/urls/urls.js';
+import { EMAIL_VALIDATION } from '../../services/Validation/Validation.js';
 
 function ForgetPass() {
 
-  let {register, formState:{errors}, handleSubmit} = useForm();
+  let { register, formState: { errors }, handleSubmit } = useForm();
   let navigate = useNavigate();
 
   const onSubmit = async (data) => {
@@ -20,12 +21,12 @@ function ForgetPass() {
         theme: "light"
       });
       navigate('/reset-password');
-      
+
     } catch (error) {
-      toast.error(error.response.data.message,{
+      toast.error(error.response.data.message, {
         theme: "light"
       });
-      
+
     }
   }
 
@@ -47,17 +48,11 @@ function ForgetPass() {
                   <span className="input-group-text" id="basic-addon1">
                     <img src={emailIcon} className="w-100" alt="email icon" />
                   </span>
-                  <input {...register('email', {
-                    required: 'Email is required',
-                    pattern: {
-                      value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                      message: 'Please enter a valid email address.'
-                    }
-                  })}
-                  type="email" className="form-control py-2 px-0" placeholder="Email" aria-label="email" aria-describedby="basic-addon1" />
+                  <input {...register('email', EMAIL_VALIDATION)}
+                    type="email" className="form-control py-2 px-0" placeholder="Email" aria-label="email" aria-describedby="basic-addon1" />
                 </div>
 
-                {errors.email&&<span className="bg-transparent text-danger">{errors.email.message}</span>}
+                {errors.email && <span className="bg-transparent text-danger">{errors.email.message}</span>}
 
                 <div className="links d-flex justify-content-end mb-4">
                   <Link to='/login' className="text-decoration-none success">Login Now?</Link>

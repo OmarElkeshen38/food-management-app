@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from 'react-toastify';
 import { USERS_URLS } from '../../services/urls/urls.js';
 import { publicAxiosInstance } from '../../services/urls/urls.js';
+import { EMAIL_VALIDATION, PASSWORD_VALIDATION } from '../../services/Validation/Validation.js';
 
 function Login({saveLoginData}) {
 
@@ -60,13 +61,7 @@ function Login({saveLoginData}) {
                   <span className="input-group-text" id="basic-addon1">
                     <img src={emailIcon} className="w-100" alt="email icon" />
                   </span>
-                  <input {...register('email', {
-                    required: 'Email is required',
-                    pattern: {
-                      value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                      message: 'Please enter a valid email address.'
-                    }
-                  })}
+                  <input {...register('email', EMAIL_VALIDATION)}
                   type="email" className="form-control py-2 px-0" placeholder="Email" aria-label="email" aria-describedby="basic-addon1" />
                 </div>
 
@@ -76,13 +71,7 @@ function Login({saveLoginData}) {
                   <span className="input-group-text" id="basic-addon1">
                     <img src={passwordIcon} alt="password icon" />
                   </span>
-                  <input {...register('password', {
-                    required: 'Password is required',
-                    pattern: {
-                      value: /^(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-                      message: 'Password must be at least 8 characters and include at least one number and one special character (@, #, $, etc.).'
-                    }
-                  })}
+                  <input {...register('password', PASSWORD_VALIDATION)}
                   type="password" id="password" className="form-control py-2 px-0" placeholder="Password" aria-label="password" aria-describedby="basic-addon2" />
                   <span className="input-group-text" id="basic-addon2">
                     <img onClick={showPass} src={showPassIcon} className="w-100 border-0 p-0 showPass" alt="show password icon" />

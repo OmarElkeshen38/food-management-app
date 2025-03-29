@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from 'react-toastify';
 import { publicAxiosInstance, USERS_URLS } from '../../services/urls/urls.js';
+import { EMAIL_VALIDATION, PASSWORD_VALIDATION, PHON_VALIDATION } from '../../services/Validation/Validation.js';
 
 function Register() {
 
@@ -28,7 +29,7 @@ function Register() {
     }
   };
 
-  let {register, formState:{errors}, handleSubmit} = useForm();
+  let { register, formState: { errors }, handleSubmit } = useForm();
   let navigate = useNavigate();
 
   const onSubmit = async (data) => {
@@ -39,14 +40,14 @@ function Register() {
         position: "top-right",
         theme: "light"
       });
-      
+
     } catch (error) {
       console.log(error.response.data);
-      
-      toast.error(error.response.data.message,{
+
+      toast.error(error.response.data.message, {
         theme: "light"
       });
-      
+
     }
   }
 
@@ -77,27 +78,21 @@ function Register() {
                           message: 'Username must be at least 3 characters and can only contain letters, numbers, and underscores (_).'
                         }
                       })}
-                      type="text" className="form-control py-3 px-0" placeholder="UserName" aria-label="userName" aria-describedby="basic-addon1" />
+                        type="text" className="form-control py-3 px-0" placeholder="UserName" aria-label="userName" aria-describedby="basic-addon1" />
                     </div>
-                    {errors.userName&&<span className="bg-transparent text-danger">{errors.userName.message}</span>}
+                    {errors.userName && <span className="bg-transparent text-danger">{errors.userName.message}</span>}
                   </div>
-                    
+
                   <div className="w-100">
                     <div className="input-group mb-1">
                       <span className="input-group-text" id="basic-addon1">
                         <img src={emailIcon} className="w-100" alt="email icon" />
                       </span>
-                      <input {...register('email', {
-                        required: 'Email is required',
-                        pattern: {
-                          value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                          message: 'Please enter a valid email address.'
-                        }
-                      })}
-                      type="email" className="form-control py-3 px-0" placeholder="Email" aria-label="email" aria-describedby="basic-addon1" />
+                      <input {...register('email', EMAIL_VALIDATION)}
+                        type="email" className="form-control py-3 px-0" placeholder="Email" aria-label="email" aria-describedby="basic-addon1" />
                     </div>
-                    {errors.email&&<span className="bg-transparent text-danger">{errors.email.message}</span>}
-                    </div>
+                    {errors.email && <span className="bg-transparent text-danger">{errors.email.message}</span>}
+                  </div>
                 </div>
 
                 <div className="d-flex align-items-center gap-5 my-3">
@@ -113,9 +108,9 @@ function Register() {
                           message: 'Please enter a valid country name.'
                         }
                       })}
-                      type="text" className="form-control py-3 px-0" placeholder="Country" aria-label="country" aria-describedby="basic-addon1" />
+                        type="text" className="form-control py-3 px-0" placeholder="Country" aria-label="country" aria-describedby="basic-addon1" />
                     </div>
-                    {errors.country&&<span className="bg-transparent text-danger">{errors.country.message}</span>}
+                    {errors.country && <span className="bg-transparent text-danger">{errors.country.message}</span>}
                   </div>
 
                   <div className="w-100">
@@ -123,16 +118,10 @@ function Register() {
                       <span className="input-group-text" id="basic-addon1">
                         <img src={emailIcon} className="w-100" alt="email icon" />
                       </span>
-                      <input {...register('phoneNumber', {
-                        required: 'Phone number is required',
-                        pattern: {
-                          value: /^\+?\d{8,15}$/,
-                          message: 'Phone number must be between 8 and 15 digits and can start with '+'. No spaces or special characters allowed.'
-                        }
-                      })}
-                      type="number" id="phoneNumber" className="form-control py-3 px-0" placeholder="PhoneNumber" aria-label="phoneNumber" aria-describedby="basic-addon2" />
+                      <input {...register('phoneNumber', PHON_VALIDATION)}
+                        type="number" id="phoneNumber" className="form-control py-3 px-0" placeholder="PhoneNumber" aria-label="phoneNumber" aria-describedby="basic-addon2" />
                     </div>
-                    {errors.phoneNumber&&<span className="bg-transparent text-danger mb-3">{errors.phoneNumber.message}</span>}
+                    {errors.phoneNumber && <span className="bg-transparent text-danger mb-3">{errors.phoneNumber.message}</span>}
                   </div>
                 </div>
 
@@ -142,22 +131,16 @@ function Register() {
                       <span className="input-group-text" id="basic-addon1">
                         <img src={passwordIcon} className="w-100" alt="password icon" />
                       </span>
-                      <input {...register('password', {
-                        required: 'Password is required',
-                        pattern: {
-                          value: /^(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-                        message: 'Password must be at least 8 characters and include at least one number and one special character (@, #, $, etc.).'
-                        }
-                      })}
-                      type="password" id='password' className="form-control py-3 px-0" placeholder="password" aria-label="password" aria-describedby="basic-addon1" />
+                      <input {...register('password', PASSWORD_VALIDATION)}
+                        type="password" id='password' className="form-control py-3 px-0" placeholder="password" aria-label="password" aria-describedby="basic-addon1" />
                       <span className="input-group-text" id="basic-addon2">
                         <img onClick={showPass} src={showPassIcon} className="w-100 border-0 p-0 showPass" alt="show password icon" />
                       </span>
                     </div>
-                    {errors.password&&<span className="bg-transparent text-danger">{errors.password.message}</span>}
+                    {errors.password && <span className="bg-transparent text-danger">{errors.password.message}</span>}
                   </div>
 
-                  <div className="w-100">  
+                  <div className="w-100">
                     <div className="input-group mb-1">
                       <span className="input-group-text" id="basic-addon1">
                         <img src={passwordIcon} className="w-100" alt="password icon" />
@@ -169,12 +152,12 @@ function Register() {
                           message: 'Passwords do not match. Please enter the same password.'
                         }
                       })}
-                      type="password" id="confirmPassword" className="form-control py-3 px-0" placeholder="confirm-password" aria-label="confirmPassword" aria-describedby="basic-addon2" />
+                        type="password" id="confirmPassword" className="form-control py-3 px-0" placeholder="confirm-password" aria-label="confirmPassword" aria-describedby="basic-addon2" />
                       <span className="input-group-text" id="basic-addon2">
                         <img onClick={showConfPass} src={showPassIcon} className="w-100 border-0 p-0 showPass" alt="show password icon" />
                       </span>
                     </div>
-                    {errors.confirmPassword&&<span className="bg-transparent text-danger mb-3">{errors.confirmPassword.message}</span>}
+                    {errors.confirmPassword && <span className="bg-transparent text-danger mb-3">{errors.confirmPassword.message}</span>}
                   </div>
                 </div>
 
