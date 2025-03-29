@@ -12,8 +12,8 @@ function Header({title, desc, img}) {
             </div>
           </div>
           <div className="col-md-4 text-center">
-            <div className="img">
-              <img className="w-" src={img} alt="header image" />
+            <div className="img w-50 m-auto">
+              <img className="w-100" src={img} alt="header image" />
             </div>
           </div>
         </div>
