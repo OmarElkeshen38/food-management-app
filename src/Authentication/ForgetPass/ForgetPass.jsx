@@ -15,7 +15,7 @@ function ForgetPass() {
 
   const onSubmit = async (data) => {
     try {
-      let response = await publicAxiosInstance.post(`${USERS_URLS.forget_pass}`, data);
+      let response = await publicAxiosInstance.post(`${USERS_URLS.Forget_Pass}`, data);
       toast.success("Code sent successfully", {
         position: "top-right",
         theme: "light"

@@ -9,6 +9,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { USERS_URLS } from '../../services/urls/urls.js';
 import { publicAxiosInstance } from '../../services/urls/urls.js';
 import { EMAIL_VALIDATION, PASSWORD_VALIDATION } from '../../services/Validation/Validation.js';
+import { useEffect } from 'react';
 
 function ResetPass() {
 
@@ -30,12 +31,19 @@ function ResetPass() {
     }
   };
 
-  let { register, formState: { errors, isSubmitting }, handleSubmit } = useForm();
+  let { register, formState: { errors, isSubmitting }, handleSubmit, watch, trigger } = useForm({ node: "onChange" });
   let navigate = useNavigate();
+
+  const password = watch('password', '');
+  const confirmPassword = watch('confirmPassword', '');
+
+  useEffect(() => {
+    trigger('confirmPassword');
+  }, [password, confirmPassword, trigger]);
 
   const onSubmit = async (data) => {
     try {
-      let response = await publicAxiosInstance.post(`${USERS_URLS.reset_pass}`, data);
+      let response = await publicAxiosInstance.post(`${USERS_URLS.Reset_Pass}`, data);
       navigate('/login');
       console.log(response);
 
@@ -112,8 +120,9 @@ function ResetPass() {
                     required: 'Confirm password is required',
                     pattern: {
                       value: /^(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-                      message: 'Passwords do not match. Please enter the same password.'
-                    }
+                      message: "PConfirm password must be at least 8 characters and include at least one number and one special character (@, #, $, etc.)."
+                    },
+                    validate: (value) => value === watch('password') || 'Passwords do not match.'
                   })}
                     type="password" id="confirmPassword" className="form-control py-2 px-0" placeholder="Confirm New Password" aria-label="confirmPassword" aria-describedby="basic-addon2" />
                   <span className="input-group-text" id="basic-addon2">

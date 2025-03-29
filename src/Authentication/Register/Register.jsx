@@ -34,7 +34,7 @@ function Register() {
 
   const onSubmit = async (data) => {
     try {
-      let response = await publicAxiosInstance.post(`${USERS_URLS.register}`, data);
+      let response = await publicAxiosInstance.post(`${USERS_URLS.Register}`, data);
       navigate('/login');
       toast.success("Register successfully", {
         position: "top-right",
