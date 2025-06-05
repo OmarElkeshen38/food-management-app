@@ -1,77 +1,96 @@
-import React, { useEffect, useState } from "react";
-import "./App.css";
-import Login from "./Authentication/Login/Login";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import AuthLayout from "./Shared/AuthLayout/AuthLayout";
-import Register from "./Authentication/Register/Register";
-import ForgetPass from "./Authentication/ForgetPass/ForgetPass";
-import ResetPass from "./Authentication/ResetPass/ResetPass";
-import VerifyAccount from "./Authentication/VerifyAccount/VerifyAccount";
-import NotFound from "./Shared/NotFound/NotFound";
-import MainLayout from "./Shared/MainLayout/MainLayout";
-import Dashboard from "./Dashboard/Dashboard";
-import RecipesList from "./Recipes/RecipesList/RecipesList";
-import RecipeData from "./Recipes/RecipeData/RecipeData";
-import CategoriesList from "./Categories/CategoriesList/CategoriesList";
-import CategoryData from "./Categories/CategoryData/CategoryData";
-import UsersList from "./Users/UsersList/UsersList";
-import { jwtDecode } from "jwt-decode";
-import ProtectedRoute from "./Shared/ProtectedRoute/ProtectedRoute";
+import { useEffect, useState } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
+import { createBrowserRouter, createHashRouter, RouterProvider } from 'react-router-dom'
+import AuthLayout from './modules/Shared/AuthLayout/AuthLayout'
+import Login from './modules/Authentication/Login/Login.jsx'
+import ForgetPass from './modules/Authentication/Forget-pass/ForgetPass'
+import Register from './modules/Authentication/Register/Register'
+import ResetPass from './modules/Authentication/Reset-pass/ResetPass'
+import RecipesList from './modules/Recipes/RecipesList/RecipesList.jsx'
+// import RecipeData from './modules/Recipes/RecipeData/RecipeData'
+import Dashboard from './modules/Dashboard/Dashboard'
+import MasterLayout from './modules/Shared/MasterLayout/MasterLayout'
+import NotFound from './modules/Shared/NotFound/NotFound'
+import CategoriesList from './modules/Categories/CategoriesList/CategoriesList'
+import CategoryData from './modules/Categories/CategoryData/CategoryData'
+import UsersList from './modules/Users/UsersList/UsersList'
+import VerifyAccount from './modules/Authentication/Verify-account/VerifyAccount.jsx'
+import { Bounce, ToastContainer } from 'react-toastify'
+import { jwtDecode } from 'jwt-decode'
+import ProtectedRoute from './modules/Shared/ProtectedRoute/ProtectedRoute.jsx'
+import RecipeData from './modules/Recipes/RecipeData/RecipeData.jsx'
+import FavoritesList from './modules/Favorites/FavoritesList/FavoritesList.jsx'
+import './App.css'
+
+
+
 
 function App() {
+ 
 
-  const [loginData, setLoginData] = useState(() => {
-    let token = localStorage.getItem('token');
-    return token ? jwtDecode(token) : null;
-  }
-  );
-
-  let saveLoginData = () => {
-    let decodedToken = jwtDecode(localStorage.getItem('token'));
-    setLoginData(decodedToken);
+  let saveLoginData=()=>{
+    let token =localStorage.getItem("token");
+    return token ?jwtDecode(token):null;
   }
 
-  useEffect(() => {
-    if (localStorage.getItem('token')) {
-      saveLoginData();
-    }
-  }, []);
+  
+  
 
-  const routes = createBrowserRouter([
-    {
-      path: "",
-      element: <AuthLayout />,
-      errorElement: <NotFound />,
-      children: [
-        { index: true, element: <Login saveLoginData={saveLoginData} /> },
-        { path: "login", element: <Login saveLoginData={saveLoginData} /> },
-        { path: "register", element: <Register /> },
-        { path: "forget-password", element: <ForgetPass /> },
-        { path: "reset-password", element: <ResetPass /> },
-        { path: "verify-account", element: <VerifyAccount /> },
-      ],
-    },
-    {
-      path: "/dashboard",
-      element: <ProtectedRoute><MainLayout loginData={loginData} /></ProtectedRoute>,
-      errorElement: <NotFound />,
-      children: [
-        { index: true, element: <Dashboard /> },
-        { path: "home", element: <Dashboard /> },
-        { path: "recipes", element: <RecipesList /> },
-        { path: "recipe-data", element: <RecipeData /> },
-        { path: "categories", element: <CategoriesList /> },
-        { path: "category", element: <CategoryData /> },
-        { path: "users", element: <UsersList /> },
-      ],
-    },
-  ]);
+  const routes=createHashRouter([{
+    path:"", 
+    element:<AuthLayout/>,
+    errorElement:<NotFound/>,
+    children:[
+      {index:true, element:<Login saveLoginData= {saveLoginData}/>},
+      {path:"login", element:<Login saveLoginData= {saveLoginData}/>},
+      {path:"forget-password", element:<ForgetPass/>},
+      {path:"register", element:<Register/>},
+      {path:"reset-password", element:<ResetPass/>},
+      {path:"verify-account", element:<VerifyAccount/>},
+      // {path:"change-password", element:<ChangePass/>},
+    ]
+  },
+
+  {
+    path:"/dashboard",
+    element: <ProtectedRoute>  <MasterLayout saveLoginData={saveLoginData}/></ProtectedRoute>,
+    errorElement:<NotFound/>,
+    children:[
+      {index:true, element:<Dashboard/>},
+      {path:"recipes", element:<RecipesList/>},
+      {path:"recipes/new-recipe", element:<RecipeData/>},
+      {path:"recipes/:recipeId", element:<RecipeData/>},
+      {path:"favorites", element:<FavoritesList/>},
+      {path:"categories", element:<CategoriesList/>},
+      {path:"category-data", element:<CategoryData/>},
+      {path:"users", element:<UsersList/>},
+    ]
+  }
+
+])
 
   return (
     <>
-      <RouterProvider router={routes}></RouterProvider>
+   
+    <RouterProvider router={routes}></RouterProvider>
+    
+
+    <ToastContainer
+  position="top-right"
+  autoClose={3000}
+  hideProgressBar={false}
+  newestOnTop={false}
+  closeOnClick={false}
+  rtl={false}
+  pauseOnFocusLoss
+  draggable
+  pauseOnHover
+  theme="colored"
+  transition={Bounce}/>
+    
     </>
-  );
+  )
 }
 
-export default App;
+export default App
