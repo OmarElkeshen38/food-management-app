@@ -1,4 +1,4 @@
-# 🍽️ RecipeHub - Food Management App
+# 🍽️ FoodRecipe - Food Management App
 
 RecipeHub is a full-featured web application that allows users to **register**, **verify their account**, and **manage recipes** with ease. Users can add, update, search, and manage recipes and categories, as well as perform account-related operations like changing passwords.
 
